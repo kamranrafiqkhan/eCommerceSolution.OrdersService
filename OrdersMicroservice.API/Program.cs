@@ -1,0 +1,49 @@
+using eCommerce.OrderMicroservice.BusinessLogicLayer;
+using eCommerce.OrderMicroservice.DataAccessLayer;
+using FluentValidation.AspNetCore;
+using eCommerce.OrdersMicroService.API.Middleware;
+
+var builder = WebApplication.CreateBuilder(args);
+
+//Add DAL and BLL services
+builder.Services.AddDataAccessLayer(builder.Configuration);
+builder.Services.AddBusinessLogicLayer(builder.Configuration);
+
+//FluentValidations
+builder.Services.AddFluentValidationAutoValidation();
+
+//Swagger
+builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddSwaggerGen();
+
+//Cors
+builder.Services.AddCors(options =>
+{
+    options.AddDefaultPolicy(policy =>
+    {
+        policy.WithOrigins("http://localhosy:4200")
+              .AllowAnyHeader()
+              .AllowAnyMethod();
+    });
+});
+
+var app = builder.Build();
+app.UseExceptionHandlingMiddleware();
+app.UseRouting();
+
+//Cors
+app.UseCors();
+
+//Swagger
+app.UseSwagger();
+app.UseSwaggerUI();
+
+//Auth
+app.UseHttpsRedirection();
+app.UseAuthentication();
+app.UseAuthorization();
+
+//Endpoints
+app.MapControllers();
+
+app.Run();
