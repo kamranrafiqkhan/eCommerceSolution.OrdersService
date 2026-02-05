@@ -1,4 +1,7 @@
-﻿using Microsoft.Extensions.Configuration;
+﻿using eCommerce.OrderMicroservice.BusinessLogicLayer.Mapping;
+using eCommerce.OrderMicroservice.BusinessLogicLayer.Validators;
+using FluentValidation;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace eCommerce.OrderMicroservice.BusinessLogicLayer;
@@ -9,6 +12,11 @@ public static class DependencyInjection
     {
         // Register your data access layer services here
         // e.g., services.AddScoped<IOrderRepository, OrderRepository>();
+
+        services.AddValidatorsFromAssemblyContaining<OrdersAddRequestValidator>();
+
+        services.AddAutoMapper(cfg => { }, typeof(OrderAddRequestToOrderMappingProfile).Assembly);
+
         return services;
     }
 }
