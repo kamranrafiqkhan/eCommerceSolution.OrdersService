@@ -4,7 +4,7 @@ using MongoDB.Driver;
 
 namespace eCommerce.OrderMicroservice.BusinessLogicLayer.ServiceContracts;
 
-public interface IOrderService
+public interface IOrdersService
 {
     Task<List<OrderResponse?>> GetOrders();
 

@@ -3,7 +3,7 @@ using MongoDB.Driver;
 
 namespace eCommerce.OrderMicroservice.DataAccessLayer.RepositoryContracts;
 
-internal interface IOrdersRepository
+public interface IOrdersRepository
 {
     Task<IEnumerable<Order>> GetOrders();
 
