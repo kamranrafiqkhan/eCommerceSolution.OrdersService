@@ -85,7 +85,7 @@ public class OrdersController : ControllerBase
 
         if (orderResponse == null)
         {
-            return Problem("Error in adding product");
+            return Problem("Error in adding order");
         }
 
         return Created($"api/Orders/search/orderid/{orderResponse?.OrderID}", orderResponse);
@@ -109,7 +109,7 @@ public class OrdersController : ControllerBase
 
         if (orderResponse == null)
         {
-            return Problem("Error in updating product");
+            return Problem("Error in updating order");
         }
 
         return Ok(orderResponse);
@@ -128,7 +128,7 @@ public class OrdersController : ControllerBase
 
         if (!isDeleted)
         {
-            return Problem("Error in deleting product");
+            return Problem("Error in deleting order");
         }
 
         return Ok(isDeleted);
